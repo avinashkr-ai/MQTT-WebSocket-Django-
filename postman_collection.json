@@ -1,0 +1,442 @@
+{
+	"info": {
+		"name": "MQTT WebSocket Django API",
+		"description": "API collection for MQTT WebSocket Django backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MQTT Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/mqtt/status/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mqtt",
+						"status",
+						""
+					]
+				},
+				"description": "Get current MQTT connection status"
+			},
+			"response": []
+		},
+		{
+			"name": "MQTT Messages",
+			"item": [
+				{
+					"name": "List Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/messages/?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"messages",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "topic",
+									"value": "",
+									"description": "Filter by topic (optional)",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Get list of MQTT messages (history) with pagination. Optional topic filter."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Message by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/messages/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"messages",
+								"1",
+								""
+							]
+						},
+						"description": "Get a specific MQTT message by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "List Messages by Topic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/messages/?topic=device/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"messages",
+								""
+							],
+							"query": [
+								{
+									"key": "topic",
+									"value": "device/status",
+									"description": "Filter messages by topic"
+								}
+							]
+						},
+						"description": "Get MQTT messages filtered by topic"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MQTT Config",
+			"item": [
+				{
+					"name": "List Configurations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/config/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"config",
+								""
+							]
+						},
+						"description": "Get list of MQTT configurations"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Configuration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"broker_host\": \"your-mqtt-broker-host\",\n    \"broker_port\": 1883,\n    \"username\": \"your-username\",\n    \"topics\": \"device/+/data,device/+/status\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/config/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"config",
+								""
+							]
+						},
+						"description": "Create a new MQTT configuration"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Configuration by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/config/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"config",
+								"1",
+								""
+							]
+						},
+						"description": "Get a specific MQTT configuration by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Configuration",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"broker_host\": \"updated-mqtt-broker-host\",\n    \"broker_port\": 1883,\n    \"username\": \"updated-username\",\n    \"topics\": \"device/+/data\",\n    \"is_active\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/config/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"config",
+								"1",
+								""
+							]
+						},
+						"description": "Update an existing MQTT configuration (full update)"
+					},
+					"response": []
+				},
+				{
+					"name": "Partial Update Configuration",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"is_active\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/config/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"config",
+								"1",
+								""
+							]
+						},
+						"description": "Partially update an MQTT configuration"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Configuration",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/config/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"config",
+								"1",
+								""
+							]
+						},
+						"description": "Delete an MQTT configuration"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Config Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/mqtt/config/status/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"mqtt",
+								"config",
+								"status",
+								""
+							]
+						},
+						"description": "Get MQTT connection status (via config endpoint)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clear History",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/mqtt/clear-history/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"mqtt",
+						"clear-history",
+						""
+					]
+				},
+				"description": "Clear all MQTT message history from database"
+			},
+			"response": []
+		},
+		{
+			"name": "Swagger Documentation",
+			"item": [
+				{
+					"name": "Swagger UI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/swagger/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"swagger",
+								""
+							]
+						},
+						"description": "OpenAPI/Swagger UI documentation"
+					},
+					"response": []
+				},
+				{
+					"name": "ReDoc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/redoc/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"redoc",
+								""
+							]
+						},
+						"description": "ReDoc API documentation"
+					},
+					"response": []
+				},
+				{
+					"name": "OpenAPI JSON Schema",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/swagger.json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"swagger.json"
+							]
+						},
+						"description": "OpenAPI JSON schema (can be imported to Postman)"
+					},
+					"response": []
+				},
+				{
+					"name": "OpenAPI YAML Schema",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/swagger.yaml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"swagger.yaml"
+							]
+						},
+						"description": "OpenAPI YAML schema"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
+
