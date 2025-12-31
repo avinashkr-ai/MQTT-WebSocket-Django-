@@ -1,4 +1,4 @@
-# MQTT WebSocket Django Application
+# MQTT WebSocket Django NextJS Application
 
 A complete Django application that subscribes to MQTT messages from ControlByWeb devices and broadcasts them to a Next.js frontend via WebSocket in real-time.
 
